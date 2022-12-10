@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Theme {
+  id                  String      @id @default(uuid())
+  name                String      @unique
+  startDate           DateTime    @default(now()) @map("start_date")
+  endDate             DateTime    @map("end_date")
+  entries             Entry[]
+}
+
+model User {
+  userName            String      @id @unique @map("user_name")
+  entries             Entry[]
+}
+
+
+model Entry {
+  id                  String      @id @default(uuid())
+  entryName           String
+  submissionTime      DateTime    @default(now())
+  user                User        @relation(fields: [userName], references: [userName])
+  userName            String
+  theme               Theme       @relation(fields: [themeName], references: [name])
+  themeName           String
+}
