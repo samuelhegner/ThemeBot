@@ -24,7 +24,7 @@ model User {
   userName   String   @id @unique @map("user_name")
   createDate DateTime @default(now()) @map("create_date")
   entries    Entry[]
-  Theme      Theme[]
+  themes     Theme[]
 }
 
 model Entry {
