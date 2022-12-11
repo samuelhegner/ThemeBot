@@ -1,13 +1,17 @@
 import { PrismaClient } from '.prisma/client';
-import { Client } from 'discord.js';
+import { Client, Events } from 'discord.js';
+import { onInteraction } from './commands/onInteraction';
 import { clientOptions } from './config/intentOptions';
+import { onReady } from './events/onReady';
 
 const prisma = new PrismaClient();
 
 async function main() {
-	const BOT = new Client(clientOptions);
-	BOT.on('ready', () => console.log('Connected to Discord!'));
-	await BOT.login(process.env.BOT_TOKEN);
+	const client = new Client(clientOptions);
+	client.on('ready', async () => await onReady(client));
+	client.on(Events.InteractionCreate, async (interaction) => await onInteraction(interaction));
+
+	await client.login(process.env.BOT_TOKEN);
 }
 
 main()
