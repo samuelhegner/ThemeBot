@@ -1,6 +1,6 @@
 import { PrismaClient } from '.prisma/client';
 import { Client, Events } from 'discord.js';
-import { onInteraction } from './commands/onInteraction';
+import { onInteraction } from './events/onInteraction';
 import { clientOptions } from './config/intentOptions';
 import { onReady } from './events/onReady';
 
