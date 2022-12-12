@@ -4,7 +4,7 @@ import { onInteraction } from './events/onInteraction';
 import { clientOptions } from './config/intentOptions';
 import { onReady } from './events/onReady';
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 async function main() {
 	const client = new Client(clientOptions);
@@ -23,6 +23,5 @@ main()
 		console.error(e);
 
 		await prisma.$disconnect();
-
 		process.exit(1);
 	});

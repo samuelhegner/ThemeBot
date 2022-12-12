@@ -11,17 +11,23 @@ datasource db {
 }
 
 model Theme {
-  id        String    @id @default(uuid())
-  name      String    @unique
-  startDate DateTime  @default(now()) @map("start_date")
-  endDate   DateTime? @map("end_date")
-  user      User      @relation(fields: [creator], references: [userName])
-  creator   String
-  entries   Entry[]
+  id         String    @id @default(uuid())
+  name       String    @unique
+  imageUrl   String    @map("image_url")
+  startDate  DateTime  @default(now()) @map("start_date")
+  updateDate DateTime  @default(now()) @map("update_date")
+  endDate    DateTime? @map("end_date")
+  user       User      @relation(fields: [creatorId], references: [userId])
+  creatorId  String
+  entries    Entry[]
+
+  @@index([startDate])
+  @@index([name])
 }
 
 model User {
-  userName   String   @id @unique @map("user_name")
+  userId     String   @id @unique @map("user_id")
+  userName   String   @map("user_name")
   createDate DateTime @default(now()) @map("create_date")
   entries    Entry[]
   themes     Theme[]
@@ -30,10 +36,11 @@ model User {
 model Entry {
   id         String   @id @default(uuid())
   name       String
+  imageUrl   String   @map("image_url")
   createDate DateTime @default(now()) @map("create_date")
   updateDate DateTime @default(now()) @map("update_date")
-  user       User     @relation(fields: [userName], references: [userName])
-  userName   String   @map("user_name")
+  user       User     @relation(fields: [author], references: [userId])
+  author     String
   theme      Theme    @relation(fields: [themeName], references: [name])
   themeName  String   @map("theme_name")
 }
