@@ -7,7 +7,11 @@ export function addThemeToEmbed(theme: Theme | (Theme & { entries: Entry[] }), e
 		embed.addFields(
 			{ name: 'Theme', value: theme.name, inline: true },
 			{ name: 'Started', value: theme.startDate.toDateString(), inline: true },
-			{ name: 'Active', value: getDaysBetweenDates(theme.startDate, new Date()).toString() + ' days', inline: true }
+			{
+				name: 'Active',
+				value: getDaysBetweenDates(theme.startDate, theme.endDate == null ? new Date() : theme.endDate).toString() + ' days',
+				inline: true
+			}
 		);
 
 		const extendedTheme = theme as Theme & { entries: Entry[] };

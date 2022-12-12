@@ -33,7 +33,7 @@ export const theme: Command = {
 			const user = toDiscordUser(interaction.member as GuildMember);
 			const options: CommandInteractionOptionResolver = interaction.options as CommandInteractionOptionResolver;
 			const subCommand = options.getSubcommand();
-			let reply: EmbedBuilder = new EmbedBuilder().setColor('Orange').setTitle('Theme:');
+			let reply: EmbedBuilder = new EmbedBuilder().setColor('Orange');
 
 			switch (subCommand) {
 				case 'new': {
@@ -56,6 +56,7 @@ export const theme: Command = {
 						reply.addFields({ name: 'Error', value: 'There was an error creating your new theme' });
 						break;
 					}
+					reply.setTitle('Created Theme:');
 					reply.setThumbnail(theme.imageUrl);
 					reply = addThemeToEmbed(theme, reply);
 					break;
@@ -72,6 +73,7 @@ export const theme: Command = {
 						reply.addFields({ name: 'Error', value: 'There was an error updating your theme' });
 						break;
 					}
+					reply.setTitle('Updated Theme:');
 					reply.setThumbnail(theme.imageUrl);
 					reply = addThemeToEmbed(theme, reply);
 					break;
@@ -83,11 +85,13 @@ export const theme: Command = {
 						reply.addFields({ name: 'Error', value: 'There was an error getting the current theme' });
 						break;
 					}
+					reply.setTitle('Current Theme:');
 					reply.setThumbnail(theme.imageUrl);
 					reply = addThemeToEmbed(theme, reply);
 					break;
 				}
 				case 'history': {
+					reply.setTitle('Past Theme:');
 					const themes = await GetThemeHistory();
 					themes.forEach((theme) => {
 						reply = addThemeToEmbed(theme, reply);

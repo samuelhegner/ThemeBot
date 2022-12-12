@@ -20,7 +20,7 @@ export const entry: Command = {
 			const user = toDiscordUser(interaction.member as GuildMember);
 			const options: CommandInteractionOptionResolver = interaction.options as CommandInteractionOptionResolver;
 			const subCommand = options.getSubcommand();
-			let reply: EmbedBuilder = new EmbedBuilder().setColor('Green').setTitle('Entry: ');
+			let reply: EmbedBuilder = new EmbedBuilder().setColor('Green');
 
 			switch (subCommand) {
 				case 'get': {
@@ -33,7 +33,7 @@ export const entry: Command = {
 						});
 						break;
 					}
-
+					reply.setTitle('Your Entry:');
 					reply = addEntryToEmbed(entry, reply);
 					break;
 				}
@@ -48,6 +48,7 @@ export const entry: Command = {
 						break;
 					}
 
+					reply.setTitle('Your New Entry:');
 					reply = addEntryToEmbed(entry, reply);
 					break;
 				}
@@ -62,6 +63,7 @@ export const entry: Command = {
 						break;
 					}
 
+					reply.setTitle('Your Updated Entry:');
 					reply = addEntryToEmbed(entry, reply);
 					break;
 				}
@@ -76,6 +78,7 @@ export const entry: Command = {
 						break;
 					}
 
+					reply.setTitle('Entry deleted:');
 					reply = addEntryToEmbed(entry, reply);
 					break;
 				}
