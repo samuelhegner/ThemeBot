@@ -9,7 +9,7 @@ export function addThemeToEmbed(theme: Theme | (Theme & { entries: Entry[] }), e
 			{ name: 'Started', value: theme.startDate.toDateString(), inline: true },
 			{
 				name: 'Active',
-				value: getDaysBetweenDates(theme.startDate, theme.endDate == null ? new Date() : theme.endDate).toString() + ' days',
+				value: getDaysBetweenDates(theme.startDate, theme.endDate == null ? new Date() : theme.endDate).toString() + ' day(s)',
 				inline: true
 			}
 		);
