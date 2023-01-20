@@ -1,6 +1,5 @@
-// import entire SDK
 import AWS from 'aws-sdk';
-import fetch from 'node-fetch';
+import axios, { isCancel, AxiosError } from 'axios';
 
 const S3 = new AWS.S3({
 	region: process.env.AWS_S3_REGION,
@@ -34,8 +33,10 @@ export function getImageName(userId: string, themeName: string): string {
 
 async function downloadImage(url: string) {
 	try {
-		const pic = await fetch(url);
-		return Buffer.from(await pic.arrayBuffer());
+		const res = await axios.get(url, {
+			responseType: 'arraybuffer'
+		});
+		return Buffer.from(res.data);
 	} catch (error) {
 		return null;
 	}

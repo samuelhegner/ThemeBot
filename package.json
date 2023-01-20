@@ -14,10 +14,10 @@
     "@discordjs/rest": "^1.4.0",
     "@prisma/client": "^4.7.1",
     "aws-sdk": "^2.1299.0",
+    "axios": "^1.2.3",
     "discord-api-types": "^0.37.21",
     "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3",
-    "node-fetch": "^3.3.0"
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "@samuelhegner/prettier-config": "^1.0.4",
