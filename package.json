@@ -13,14 +13,15 @@
     "@discordjs/builders": "github:discordjs/builders",
     "@discordjs/rest": "^1.4.0",
     "@prisma/client": "^4.7.1",
-    "aws-sdk": "^2.1298.0",
+    "aws-sdk": "^2.1299.0",
     "discord-api-types": "^0.37.21",
     "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "node-fetch": "^3.3.0"
   },
   "devDependencies": {
     "@samuelhegner/prettier-config": "^1.0.4",
-    "@types/node": "^18.11.12",
+    "@types/node": "^18.11.18",
     "prisma": "^4.7.1",
     "typescript": "^4.9.4"
   },

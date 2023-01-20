@@ -62,12 +62,20 @@ export const theme: Command = {
 					break;
 				}
 				case 'update': {
+					let serverIconUrl: string = interaction.guild?.iconURL() as string;
+
+					if (serverIconUrl == null) {
+						reply.addFields({ name: 'Error', value: 'Failed to retrieve server icon' });
+						break;
+					}
+
 					const name = options.getString('name');
+
 					if (name == null) {
 						reply.addFields({ name: 'Error', value: 'Please include you new themes name!' });
 						break;
 					}
-					const theme = await UpdateCurrentTheme(name, user);
+					const theme = await UpdateCurrentTheme(name, serverIconUrl);
 
 					if (theme == null) {
 						reply.addFields({ name: 'Error', value: 'There was an error updating your theme' });
