@@ -1,9 +1,6 @@
-import { Entry } from '@prisma/client';
 import { prisma } from '..';
-import { entry } from '../commands/entry';
 import { DiscordUser } from '../interfaces/DiscordUser';
-import { getImageName, saveImageToBucket } from './imageStorage';
-import { GetCurrentTheme } from './themes';
+import { getEntryImageName, saveImageToBucket } from './imageStorage';
 
 export async function EnterTheme(user: DiscordUser) {
 	const themeEntries = await prisma.theme.findFirst({ orderBy: { startDate: 'desc' }, select: { id: true, name: true, entries: true } });
@@ -15,7 +12,7 @@ export async function EnterTheme(user: DiscordUser) {
 	if (themeEntries.entries.findIndex((entry) => entry.author === user.id) !== -1) {
 		return null;
 	}
-	const name = getImageName(user.id, themeEntries.name);
+	const name = getEntryImageName(user.id, themeEntries.name);
 	const url = await saveImageToBucket(name, 'entry-pictures', user.avatarUrl);
 
 	const entry = await prisma.entry.create({
@@ -59,7 +56,7 @@ export async function UpdateEntry(user: DiscordUser) {
 
 	const entry = themeEntries.entries[entryIndex];
 
-	const name = getImageName(user.id, entry.themeName);
+	const name = getEntryImageName(user.id, entry.themeName);
 	const url = await saveImageToBucket(name, 'entry-pictures', user.avatarUrl);
 
 	const updatedEntry = await prisma.entry.update({

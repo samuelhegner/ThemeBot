@@ -25,10 +25,15 @@ export async function saveImageToBucket(name: string, folder: 'entry-pictures' |
 	return s3Url != null ? s3Url : discordUrl;
 }
 
-export function getImageName(userId: string, themeName: string): string {
+export function getEntryImageName(userId: string, themeName: string): string {
 	let key = userId + '_' + themeName;
 	key = key.replace(/ /g, '-');
 	return key;
+}
+
+export function getThemeImageName(themeName: string): string {
+	themeName = themeName.replace(/ /g, '-');
+	return themeName;
 }
 
 async function downloadImage(url: string) {

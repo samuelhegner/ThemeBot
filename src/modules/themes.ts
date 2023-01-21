@@ -1,7 +1,7 @@
 import { Theme } from '@prisma/client';
 import { prisma } from '..';
 import { DiscordUser } from '../interfaces/DiscordUser';
-import { getImageName, saveImageToBucket } from './imageStorage';
+import { getThemeImageName, saveImageToBucket } from './imageStorage';
 
 export async function CreateNewTheme(name: string, serverIconUrl: string, user: DiscordUser): Promise<Theme> {
 	const currentTheme = await GetCurrentTheme();
@@ -10,7 +10,7 @@ export async function CreateNewTheme(name: string, serverIconUrl: string, user: 
 		await EndTheme(currentTheme);
 	}
 
-	const url = await saveImageToBucket(name, 'theme-picures', serverIconUrl);
+	const url = await saveImageToBucket(getThemeImageName(name), 'theme-picures', serverIconUrl);
 
 	const theme = await prisma.theme.create({
 		data: {
@@ -36,7 +36,7 @@ export async function CreateNewTheme(name: string, serverIconUrl: string, user: 
 export async function UpdateCurrentTheme(updatedName: string, serverIconUrl: string) {
 	const currentTheme = await GetCurrentTheme();
 
-	const url = await saveImageToBucket(updatedName, 'theme-picures', serverIconUrl);
+	const url = await saveImageToBucket(getThemeImageName(updatedName), 'theme-picures', serverIconUrl);
 
 	if (currentTheme == null) return null;
 
