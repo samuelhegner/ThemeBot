@@ -60,7 +60,8 @@ async function uploadImage(name: string, folder: 'entry-pictures' | 'theme-picur
 		await S3.putObject({
 			Body: buffer,
 			Bucket: bucket,
-			Key: fullKey
+			Key: fullKey,
+			StorageClass: 'INTELLIGENT_TIERING'
 		}).promise();
 
 		return prefix + fullKey;
