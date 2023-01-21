@@ -1,29 +1,30 @@
 {
-  "name": "themebot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./prod/index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node -r dotenv/config ./prod/index.js"
-  },
-  "author": "Samuel Hegner",
-  "license": "ISC",
-  "dependencies": {
-    "@discordjs/builders": "github:discordjs/builders",
-    "@discordjs/rest": "^1.4.0",
-    "@prisma/client": "^4.7.1",
-    "aws-sdk": "^2.1299.0",
-    "axios": "^1.2.3",
-    "discord-api-types": "^0.37.21",
-    "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3"
-  },
-  "devDependencies": {
-    "@samuelhegner/prettier-config": "^1.0.4",
-    "@types/node": "^18.11.18",
-    "prisma": "^4.7.1",
-    "typescript": "^4.9.4"
-  },
-  "prettier": "@samuelhegner/prettier-config"
+	"name": "themebot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./prod/index.js",
+	"scripts": {
+		"build": "npx prisma generate && npx tsc",
+		"start": "node -r dotenv/config ./prod/index.js",
+		"dev": "npm run build && npm run start"
+	},
+	"author": "Samuel Hegner",
+	"license": "ISC",
+	"dependencies": {
+		"@discordjs/builders": "github:discordjs/builders",
+		"@discordjs/rest": "^1.4.0",
+		"@prisma/client": "^4.7.1",
+		"aws-sdk": "^2.1299.0",
+		"axios": "^1.2.3",
+		"discord-api-types": "^0.37.21",
+		"discord.js": "^14.7.1",
+		"dotenv": "^16.0.3"
+	},
+	"devDependencies": {
+		"@samuelhegner/prettier-config": "^1.0.4",
+		"@types/node": "^18.11.18",
+		"prisma": "^4.7.1",
+		"typescript": "^4.9.4"
+	},
+	"prettier": "@samuelhegner/prettier-config"
 }

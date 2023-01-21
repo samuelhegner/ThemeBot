@@ -41,6 +41,9 @@ async function downloadImage(url: string) {
 		const res = await axios.get(url, {
 			responseType: 'arraybuffer'
 		});
+
+		if (res.status != 200) return null;
+
 		return Buffer.from(res.data);
 	} catch (error) {
 		return null;
